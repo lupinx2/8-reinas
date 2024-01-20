@@ -44,7 +44,7 @@
           reinasRestantes++;
           document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
           document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
-          reinas.pop([renglon, columna]);
+          reinas = reinas.filter(function(reina) {return !(reina[0] == renglon && reina[1] == columna);} );
         } else {
           if (reinasColocadas < 8) {
             celda.style ="background-image: url(./img/reina1.png); background-size:cover;";
@@ -60,6 +60,7 @@
       }
 
       function checarTablero(){
+        limpiarTablero();
         var tablero = document.getElementById("chessBoard");
         var tempReinasAmenazadas = 0;
         for (var index in reinas){
@@ -106,6 +107,15 @@
                         tablero.rows[reina[0] + i].cells[reina[1] + i].style.backgroundColor = "red";
                     }
                 }
+            }
+        }
+      }
+
+      function limpiarTablero(){
+        var tablero = document.getElementById("chessBoard");
+        for (i=0; i<8; i++){
+            for (j=0; j<8; j++){
+                tablero.rows[i].cells[j].style.backgroundColor = "";
             }
         }
       }
