@@ -64,7 +64,7 @@
         var tempReinasAmenazadas = 0;
         for (var index in reinas){
             var reina = reinas[index];
-            switch (reina){
+            switch (true){
                 case reina[0] > reina[1]:
                     var coordenadaMenor = reina[1];
                     var coordenadaMayor = reina[0];
@@ -72,38 +72,43 @@
                 case reina[0] < reina[1]:
                     var coordenadaMenor = reina[0];
                     var coordenadaMayor = reina[1];
+                    break;
                 default: //los valores son iguales
+                    console.assert(reina[0] == reina[1], "Error evaluating coordinates");
                     var coordenadaMenor = reina[0];
-                    var coordenadaMayor = reina[0];
+                    var coordenadaMayor = reina[0];                    
             }
-            //marcar lineas de ataque horizontales y verticales
+            //marcar lineas de ataque
             for (i=0; i<8; i++){
+                //Horizontal
                 if (i != reina[1]){
-                    tablero.rows[reina[0]].cells[i].style.backgroundColor = "red";
+                    tablero.rows[reina[0]].cells[i].style.backgroundColor = "red";                    
                 }
+                //Vertical
                 if (i != reina[0]){
                     tablero.rows[i].cells[reina[1]].style.backgroundColor = "red";
                 }
-                if (i<=coordenadaMenor && i>0){
-                    tablero.rows[reina[0] - i].cells[reina[1] - i].style.backgroundColor = "red";
+                if (i>0){
+                    //Diagonal izquierda superior
+                    if (i<=coordenadaMenor){ 
+                        tablero.rows[reina[0] - i].cells[reina[1] - i].style.backgroundColor = "red";
+                    }
+                    //Diagonal izquierda inferior
+                    if ((reina[0] + i)<8 && (reina[1] >= i)){ 
+                        tablero.rows[reina[0] + i].cells[reina[1] - i].style.backgroundColor = "red";
+                    }
+                    //Digonal derecha superior
+                    if ((reina[0] >= i) && (reina[1] + i)<8){
+                        tablero.rows[reina[0] - i].cells[reina[1] + i].style.backgroundColor = "red";
+                    }
+                    //Digonal derecha inferior
+                    if ((coordenadaMayor + i)<8){ 
+                        tablero.rows[reina[0] + i].cells[reina[1] + i].style.backgroundColor = "red";
+                    }
                 }
             }
         }
       }
-
-      function checarTablero2(){
-        /* for (i=0; i<8; i++){//row
-            for (j=0; j<8; j++){//column
-                for (reina in reinas){
-                    for 
-                    if (i + reina[0])
-                }
-            }
-        } */
-      }
-
-    
-
 
     </script>
 </head>
