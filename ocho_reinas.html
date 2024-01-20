@@ -29,6 +29,8 @@
     <script>
         var reinasColocadas = 0;
         var reinasRestantes = 8;
+        var reinasAmenazadas = 0;
+        var reinas = new Array;
 
         function colocarReina(celda) {
         //alert("click reina" + celda);
@@ -42,30 +44,7 @@
           reinasRestantes++;
           document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
           document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
-            for (var i = 0; i < 8; i++) {
-                if (i != columna) {
-                tablero.rows[renglon].cells[i].style.backgroundColor = "";
-                }
-            }
-            for (var i = 0; i < 8; i++) {
-                if (i != renglon) {
-                tablero.rows[i].cells[columna].style.backgroundColor = "";
-                }
-            }   
-            for (var i = 0; i < 8; i++) {
-                if (i != columna) {
-                    if (renglon - columna + i >= 0 && renglon - columna + i < 8) {
-                        tablero.rows[renglon - columna + i].cells[i].style.backgroundColor = "";
-                    }
-                }
-            }   
-            for (var i = 0; i < 8; i++) {
-                if (i != columna) {
-                    if (renglon + columna - i >= 0 && renglon + columna - i < 8) {
-                        tablero.rows[renglon + columna - i].cells[i].style.backgroundColor = "";
-                    }
-                }
-            }
+          reinas.pop([renglon, columna]);
         } else {
           if (reinasColocadas < 8) {
             celda.style ="background-image: url(./img/reina1.png); background-size:cover;";
@@ -74,33 +53,58 @@
             document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
             document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
             var tablero = document.getElementById("chessBoard");
-            for (var i = 0; i < 8; i++) {
-                if (i != columna) {     
-                    tablero.rows[renglon].cells[i].style.backgroundColor = "red";
-                }
-            }
-            for (var i = 0; i < 8; i++) {
-                if (i != renglon) {
-                    tablero.rows[i].cells[columna].style.backgroundColor = "red";
-                }
-            }
-            for (var i = 0; i < 8; i++) {
-                if (i != columna) {
-                    if (renglon - columna + i >= 0 && renglon - columna + i < 8) {
-                        tablero.rows[renglon - columna + i].cells[i].style.backgroundColor = "red";
-                    }
-                }
-            }
-            for (var i = 0; i < 8; i++) {
-                if (i != columna) {
-                    if (renglon + columna - i >= 0 && renglon + columna - i < 8) {
-                        tablero.rows[renglon + columna - i].cells[i].style.backgroundColor = "red";
-                    }
-                }
-            }
+            reinas.push([renglon, columna]);
           }
         }
+        checarTablero();
       }
+
+      function checarTablero(){
+        var tablero = document.getElementById("chessBoard");
+        var tempReinasAmenazadas = 0;
+        for (var index in reinas){
+            var reina = reinas[index];
+            switch (reina){
+                case reina[0] > reina[1]:
+                    var coordenadaMenor = reina[1];
+                    var coordenadaMayor = reina[0];
+                    break;
+                case reina[0] < reina[1]:
+                    var coordenadaMenor = reina[0];
+                    var coordenadaMayor = reina[1];
+                default: //los valores son iguales
+                    var coordenadaMenor = reina[0];
+                    var coordenadaMayor = reina[0];
+            }
+            //marcar lineas de ataque horizontales y verticales
+            for (i=0; i<8; i++){
+                if (i != reina[1]){
+                    tablero.rows[reina[0]].cells[i].style.backgroundColor = "red";
+                }
+                if (i != reina[0]){
+                    tablero.rows[i].cells[reina[1]].style.backgroundColor = "red";
+                }
+                if (i<=coordenadaMenor && i>0){
+                    tablero.rows[reina[0] - i].cells[reina[1] - i].style.backgroundColor = "red";
+                }
+            }
+        }
+      }
+
+      function checarTablero2(){
+        /* for (i=0; i<8; i++){//row
+            for (j=0; j<8; j++){//column
+                for (reina in reinas){
+                    for 
+                    if (i + reina[0])
+                }
+            }
+        } */
+      }
+
+    
+
+
     </script>
 </head>
 <div>
