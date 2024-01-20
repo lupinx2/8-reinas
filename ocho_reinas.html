@@ -33,13 +33,19 @@
         function colocarReina(celda) {
             //alert("click reina" + celda);
             if (reinasColocadas < 8) {
-                celda.style = "background-image: url(./img/reina1.png); background-size:cover;"
-                reinasColocadas++;
-                reinasRestantes--;
-                document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
-                document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
-            } else {
-                alert("Ya usaste las 8 reinas");
+                if (window.getComputedStyle(celda).backgroundImage == "none") {
+                    celda.style = "background-image: url(./img/reina1.png); background-size:cover;"
+                    reinasColocadas++;
+                    reinasRestantes--;
+                    document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
+                    document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
+                }else{
+                    celda.style = "background-image: none;"
+                    reinasColocadas--;
+                    reinasRestantes++;
+                    document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
+                    document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
+                }
             }
         }
     </script>
