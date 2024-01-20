@@ -33,36 +33,36 @@
         var reinas = new Array;
 
         function colocarReina(celda) {
-        //alert("click reina" + celda);
-        var renglon = celda.parentElement.rowIndex;
-        var columna = celda.cellIndex;
-        var tablero = document.getElementById("chessBoard");
-        //alert("renglon: " + renglon + " columna: " + columna);
-        if (window.getComputedStyle(celda).backgroundImage != "none") {
-          celda.style = "background-image: none;";
-          reinasColocadas--;
-          reinasRestantes++;
-          document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
-          document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
-          reinas = reinas.filter(function(reina) {return !(reina[0] == renglon && reina[1] == columna);} );
-        } else {
-          if (reinasColocadas < 8) {
-            celda.style ="background-image: url(./img/reina1.png); background-size:cover;";
-            reinasColocadas++;
-            reinasRestantes--;
+            //alert("click reina" + celda);
+            var renglon = celda.parentElement.rowIndex;
+            var columna = celda.cellIndex;
+            var tablero = document.getElementById("chessBoard");
+            //alert("renglon: " + renglon + " columna: " + columna);
+            if (window.getComputedStyle(celda).backgroundImage != "none") {
+            celda.style = "background-image: none;";
+            reinasColocadas--;
+            reinasRestantes++;
             document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
             document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
-            var tablero = document.getElementById("chessBoard");
-            reinas.push([renglon, columna]);
-          }
+            reinas = reinas.filter(function(reina) {return !(reina[0] == renglon && reina[1] == columna);} );
+            } else {
+            if (reinasColocadas < 8) {
+                celda.style ="background-image: url(./img/reina1.png); background-size:cover;";
+                reinasColocadas++;
+                reinasRestantes--;
+                document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
+                document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
+                var tablero = document.getElementById("chessBoard");
+                reinas.push([renglon, columna]);
+            }
+            }
+            checarTablero();
         }
-        checarTablero();
-      }
 
       function checarTablero(){
         limpiarTablero();
         var tablero = document.getElementById("chessBoard");
-        var tempReinasAmenazadas = 0;
+        //marcar lineas de ataque
         for (var index in reinas){
             var reina = reinas[index];
             switch (true){
@@ -79,7 +79,6 @@
                     var coordenadaMenor = reina[0];
                     var coordenadaMayor = reina[0];                    
             }
-            //marcar lineas de ataque
             for (i=0; i<8; i++){
                 //Horizontal
                 if (i != reina[1]){
@@ -109,6 +108,21 @@
                 }
             }
         }
+        //Contar reinas amenazadas
+        reinasAmenazadas = 0;
+        for (var index in reinas){
+            var reina = reinas[index];
+            if (tablero.rows[reina[0]].cells[reina[1]].style.backgroundColor == "red"){
+                reinasAmenazadas++
+            }
+        }
+        document.getElementById("reinasAmenazadas").innerHTML = reinasAmenazadas;
+        if (reinasAmenazadas > 0){
+            document.getElementById("reinasAmenazadas").style.color = "red";
+        } else {
+            document.getElementById("reinasAmenazadas").style.color = "";
+        }
+
       }
 
       function limpiarTablero(){
@@ -122,6 +136,10 @@
 
       function reiniciarTablero(){
         limpiarTablero();
+        var reinasColocadas = 0;
+        var reinasRestantes = 8;
+        var reinasAmenazadas = 0;
+        document.getElementById("reinasAmenazadas").style.color = "";
         reinas = [];
       }
 
