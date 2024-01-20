@@ -1,116 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        table, td, tr{
+        table,
+        td,
+        tr {
             border: 3px solid black;
             border-collapse: collapse;
             width: 800px;
             height: 100px;
         }
 
-        tr:nth-child(odd) td:nth-child(even), tr:nth-child(even) td:nth-child(odd){
+        tr:nth-child(odd) td:nth-child(even),
+        tr:nth-child(even) td:nth-child(odd) {
             background-color: rgb(116, 8, 210);
         }
-        tr:nth-child(even) td:nth-child(even), tr:nth-child(odd) td:nth-child(odd){
+
+        tr:nth-child(even) td:nth-child(even),
+        tr:nth-child(odd) td:nth-child(odd) {
             background-color: rgba(63, 218, 16, 0.329);
         }
-
     </style>
 
     <script>
-        function colocarReina(celda){
-            alert("click reina" + celda);
-            celda.style="background-image: url(./img/reina1.png); background-size:cover;"
+        var reinasColocadas = 0;
+        var reinasRestantes = 8;
+
+        function colocarReina(celda) {
+            //alert("click reina" + celda);
+            if (reinasColocadas < 8) {
+                celda.style = "background-image: url(./img/reina1.png); background-size:cover;"
+                reinasColocadas++;
+                reinasRestantes--;
+                document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
+                document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
+            } else {
+                alert("Ya usaste las 8 reinas");
+            }
         }
     </script>
 </head>
-<body>
-    <table>
-        <tr>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-        </tr>
-        <tr>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-        </tr>
-        <tr>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-        </tr>
-        <tr>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-        </tr>
-        <tr>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-        </tr>
-        <tr>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-        </tr>
-        <tr>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-        </tr>
-        <tr>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-            <td onclick="colocarReina(this)"></td>
-        </tr>
-    </table>
+<h1>8 Reinas</h1>
+<p>Colocar 8 reinas en un tablero de ajedrez sin que se amenacen entre ellas</p>
+<div>
+    <p>Reinas colocadas: <span id="reinasColocadas">0</span></p>
+    <p>Reinas restantes: <span id="reinasRestantes">8</span></p>
+    <p>Reinas amenazadas: <span id="reinasAmenazadas">0</span></p>
 
-</body>
+    <body>
+        <table>
+            <tr>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+            </tr>
+            <tr>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+            </tr>
+            <tr>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+            </tr>
+            <tr>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+            </tr>
+            <tr>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+            </tr>
+            <tr>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+            </tr>
+            <tr>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+            </tr>
+            <tr>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+                <td onclick="colocarReina(this)"></td>
+            </tr>
+        </table>
+
+
+    </body>
+
 </html>
