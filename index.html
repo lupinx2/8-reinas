@@ -138,9 +138,12 @@
         var tablero = document.getElementById("chessBoard");
         limpiarTablero();//quita espacios rojos
         var reinasColocadas = 0;
+        document.getElementById("reinasColocadas").innerHTML = reinasColocadas;
         var reinasRestantes = 8;
+        document.getElementById("reinasRestantes").innerHTML = reinasRestantes;
         var reinasAmenazadas = 0;
         document.getElementById("reinasAmenazadas").style.color = "";
+        document.getElementById("reinasAmenazadas").innerHTML = reinasAmenazadas;
         for (i=0; i<8; i++){
             for (j=0; j<8; j++){
                 tablero.rows[i].cells[j].style="background-image : none;";
