@@ -135,11 +135,17 @@
       }
 
       function reiniciarTablero(){
-        limpiarTablero();
+        var tablero = document.getElementById("chessBoard");
+        limpiarTablero();//quita espacios rojos
         var reinasColocadas = 0;
         var reinasRestantes = 8;
         var reinasAmenazadas = 0;
         document.getElementById("reinasAmenazadas").style.color = "";
+        for (i=0; i<8; i++){
+            for (j=0; j<8; j++){
+                tablero.rows[i].cells[reina[1]].style.backgroundImage = "";
+            }
+        }
         reinas = [];
       }
 
@@ -153,6 +159,7 @@
     <p>Reinas amenazadas: <span id="reinasAmenazadas">0</span></p>
 </div>
     <body>
+        <button onclick="reiniciarTablero()">Reiniciar</button>
         <table id="chessBoard">
             <tr>
                 <td onclick="colocarReina(this)"></td>
@@ -235,11 +242,5 @@
                 <td onclick="colocarReina(this)"></td>
             </tr>
         </table>
-        <div>
-            <p class="name">btn_reiniciar</p>
-            <button onclick="reiniciarTablero()">Reiniciar</button>
-       </div>      
-
     </body>
-
 </html>
